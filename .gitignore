@@ -1,0 +1,12 @@
+# Godot specific
+.godot/*
+*.import
+
+# Binaries/builds
+bin/
+build/
+
+#Object files
+*.o
+*.os
+*.so

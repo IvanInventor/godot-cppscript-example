@@ -1,0 +1,3 @@
+[submodule "cppscript"]
+	path = cppscript
+	url = https://github.com/IvanInventor/godot-cpp-script
