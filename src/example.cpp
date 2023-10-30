@@ -49,7 +49,6 @@ int Example::def_args(int p_a, int p_b) {
 void Example::_notification(int p_what) {
 	if (p_what == NOTIFICATION_READY) {
 	// RPC methods added by macros are initialized in _rpc_config method, add it here or in _ready() method
-		_rpc_config();
 	/*	Dictionary opts;
 		opts["rpc_mode"] = MultiplayerAPI::RPC_MODE_AUTHORITY;
 		opts["transfer_mode"] = MultiplayerPeer::TRANSFER_MODE_RELIABLE;
@@ -160,6 +159,11 @@ Viewport *Example::return_something_const() const {
 		return result;
 	}
 	return nullptr;
+}
+
+Ref<ExampleRef> Example::return_ref() const {
+	Ref<ExampleRef> ref;
+	return ref;
 }
 
 Ref<ExampleRef> Example::return_empty_ref() const {
@@ -317,7 +321,6 @@ int Example::return_last_rpc_arg() {
 }
 
 // Properties.
-/*
 void Example::set_custom_position(const Vector2 &pos) {
 	custom_position = pos;
 }
@@ -325,7 +328,7 @@ void Example::set_custom_position(const Vector2 &pos) {
 Vector2 Example::get_custom_position() const {
 	return custom_position;
 }
-*/
+
 Vector4 Example::get_v4() const {
 	return Vector4(1.2, 3.4, 5.6, 7.8);
 }
@@ -347,5 +350,5 @@ void Example::_input(const Ref<InputEvent> &event) {
 }
 
 void Example::print_vec() {
-	UtilityFunctions::print("[", custom_position.x, ", ", custom_position.y);
+	UtilityFunctions::print('[', custom_position.x, ", ", custom_position.y, ']');
 }

@@ -145,9 +145,8 @@ func _ready():
 	# BitFields.
 	assert_equal(Example.FLAG_ONE, 1)
 	assert_equal(Example.FLAG_TWO, 2)
-	# TEMP
-	#assert_equal(example.test_bitfield(0), 0)
-	#assert_equal(example.test_bitfield(Example.FLAG_ONE | Example.FLAG_TWO), 3)
+	assert_equal(example.test_bitfield(0), 0)
+	assert_equal(example.test_bitfield(Example.FLAG_ONE | Example.FLAG_TWO), 3)
 
 	# RPCs.
 	assert_equal(example.return_last_rpc_arg(), 0)

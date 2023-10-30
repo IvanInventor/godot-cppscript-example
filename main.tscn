@@ -17,6 +17,20 @@ offset_top = -2.0
 offset_right = 234.0
 offset_bottom = 21.0
 
+[node name="ExampleProperties" type="ExampleProperties" parent="Example"]
+basictypes_float_range_property = 21.8
+basictypes_float_easing_property = 0.570525
+flags_flags_property = 3
+flags_property_2d_render = 4
+flags_property_2d_physics = 65793
+flags_property_2d_navigation = 0
+flags_property_3d_render = -2147483648
+flags_property_3d_physics = 1086947328
+flags_property_3d_navigation = 0
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Button" type="Button" parent="."]
 offset_right = 79.0
 offset_bottom = 29.0
