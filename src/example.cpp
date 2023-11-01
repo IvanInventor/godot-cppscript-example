@@ -2,16 +2,10 @@
  *
  * This is free and unencumbered software released into the public domain.
  */
+#include <godot_cpp/classes/label.hpp>
+#include <godot_cpp/variant/utility_functions.hpp>
 
 #include "example.hpp"
-
-#include <godot_cpp/core/class_db.hpp>
-
-#include <godot_cpp/classes/global_constants.hpp>
-#include <godot_cpp/classes/label.hpp>
-#include <godot_cpp/classes/multiplayer_api.hpp>
-#include <godot_cpp/classes/multiplayer_peer.hpp>
-#include <godot_cpp/variant/utility_functions.hpp>
 
 using namespace godot;
 
@@ -31,6 +25,7 @@ ExampleRef::~ExampleRef() {
 }
 
 void Example::_ready() {
+	// Add this call here to make use of GRPC macros
 	_rpc_config();
 }
 
@@ -187,6 +182,10 @@ Ref<ExampleRef> Example::extended_ref_checks(Ref<ExampleRef> p_ref) const {
 
 Variant Example::varargs_func(const Variant **args, GDExtensionInt arg_count, GDExtensionCallError &error) {
 	return arg_count;
+}
+
+Variant Example::varargs_func_example(const Variant **args, GDExtensionInt arg_count, GDExtensionCallError &error) {
+	return Variant();
 }
 
 int Example::varargs_func_nv(const Variant **args, GDExtensionInt arg_count, GDExtensionCallError &error) {

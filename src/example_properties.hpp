@@ -1,3 +1,7 @@
+/* CppScript example of property hints
+ *
+ * All hints with available documentation are used here
+ */
 #include <godot_cpp/classes/control.hpp>
 #include <godot_cpp/classes/expression.hpp>
 #include <godot_cpp/classes/texture2d.hpp>
@@ -15,12 +19,33 @@ public:
 
 	GSUBGROUP(int);
 
+	// Arguments of GPROPERTY:
+	// setter	- custom or auto generated
+	// getter	- custom or auto generated
+	// hint_type
+	// hint_string
+	//
+	// hint_type - name of type from
+	// PropertyHint enum without PROPERTY_HINT part,
+	// optionally lowercase
+	//
+	// PROPERTY_HINT_RANGE -> range
+	// PROPERTY_HINT_LAYERS_2D_RENDER -> layers_2d_render
+	//
+	// hint_string - C-style string,
+	// content depends on hint type
+	// can be omitted in GPROPERTY()
+
+	GPROPERTY(set_nohint, get_nohint,
+		none);
+	int nohint_property = 0;
+
 	GPROPERTY(set_enum, get_enum,
 		enum, "Select:2,Any:4,Word:6");
 	int enum_property = 2;
 
 	GPROPERTY(set_object_id, get_object_id,
-		object_id, "");
+		object_id);
 	int object_id_property = 0;
 
 
@@ -71,11 +96,11 @@ public:
 
 
 
-	GGROUP(Vector)
+	GGROUP(Vector);
 
 	GPROPERTY(set_link, get_link,
 		link);
-	Vector2 link_property;
+	Vector2 link_property{5, 10};
 
 
 
@@ -84,31 +109,31 @@ public:
 
 	GPROPERTY(set_flags, get_flags,
 		flags, "One,Two,Three,Five:16");
-	int flags_property;
+	int flags_property = 0;
 
 	GPROPERTY(set_2d_render, get_2d_render,
 		layers_2d_render);
-	int property_2d_render;
+	int property_2d_render = 0;
 
 	GPROPERTY(set_2d_physics, get_2d_physics,
 		layers_2d_physics);
-	int property_2d_physics;
+	int property_2d_physics = 0;
 
 	GPROPERTY(set_2d_navigation, get_2d_navigation,
 		layers_2d_navigation);
-	int property_2d_navigation;
+	int property_2d_navigation = 0;
 
 	GPROPERTY(set_3d_render, get_3d_render,
 		layers_3d_render);
-	int property_3d_render;
+	int property_3d_render = 0;
 
 	GPROPERTY(set_3d_physics, get_3d_physics,
 		layers_3d_physics);
-	int property_3d_physics;
+	int property_3d_physics = 0;
 
 	GPROPERTY(set_3d_navigation, get_3d_navigation,
 		layers_3d_navigation);
-	int property_3d_navigation;
+	int property_3d_navigation = 0;
 
 
 
@@ -165,7 +190,7 @@ public:
 
 
 
-	GGROUP(Others)
+	GGROUP(Others);
 
 	GPROPERTY(set_hide_quat_edit, get_hide_quat_edit,
 		hide_quaternion_edit);
@@ -195,11 +220,11 @@ public:
 
 	GPROPERTY(set_int_is_objectid, get_int_is_objectid,
 		int_is_objectid);
-	int int_is_objectid_property;
+	int int_is_objectid_property = 0;
 
 	GPROPERTY(set_int_is_pointer, get_int_is_pointer,
 		int_is_pointer);
-	int int_is_pointer_property;
+	int int_is_pointer_property = 0;
 
 	GPROPERTY(set_array_type, get_array_type,
 		array_type);

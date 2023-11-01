@@ -11,14 +11,12 @@
 #endif
 
 #include <godot_cpp/classes/control.hpp>
-#include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/image.hpp>
 #include <godot_cpp/classes/input_event_key.hpp>
 #include <godot_cpp/classes/tile_map.hpp>
 #include <godot_cpp/classes/tile_set.hpp>
 #include <godot_cpp/classes/viewport.hpp>
 
-#include <godot_cpp/core/binder_common.hpp>
 
 //include this to use macros here
 #include <cppscript.h>
@@ -40,19 +38,6 @@ class Example : public Control {
 	GSIGNAL(custom_signal, String name, int value);
 	GSIGNAL(example_signal, float typed_arg, untyped_arg);
 
-protected:
-	// This method is created automatically
-	//static void _bind_methods();
-
-	void _notification(int p_what);
-	bool _set(const StringName &p_name, const Variant &p_value);
-	bool _get(const StringName &p_name, Variant &r_ret) const;
-	void _get_property_list(List<PropertyInfo> *p_list) const;
-	bool _property_can_revert(const StringName &p_name) const;
-	bool _property_get_revert(const StringName &p_name, Variant &r_property) const;
-
-	String _to_string() const;
-
 private:
 	// Group/subgroup declarations
 	// Affects all properties below it
@@ -62,20 +47,30 @@ private:
 
 	// Property declaration
 	// Provide setter and getter name
+	//
 	// If member function with the same name is not declared,
 	// it is created automatically
 	// (it is a template, not a generated declaration,
 	// so it is not assessible from a C++ code)
 	GPROPERTY(set_custom_position, get_custom_position);
-
-	Vector2 custom_position;
+	Vector2 custom_position; // Has custom setter/getter
 	
 
 	// No custom set/get example
 	GPROPERTY(set_float_auto, get_float_auto);
 	float float_auto = 0;
 
-private:
+	// Property declaration with hint string
+	//
+	// More examples of property hints in
+	//
+	// 	src/example_properties.hpp file
+	// 	AND
+	// 	ExampleProperties node in editor
+	GPROPERTY(set_float_hint, get_float_hint,
+		range, "0,1000,5");
+	float float_hint = 0;
+
 	Vector3 property_from_list;
 	Vector2 dprop[3];
 	int last_rpc_arg = 0;
@@ -138,6 +133,11 @@ public:
 	GVARARG(String some_argument);
 	Variant varargs_func(const Variant **args, GDExtensionInt arg_count, GDExtensionCallError &error);
 
+	GVARARG(String named_arg, unnamed_arg);
+	Variant varargs_func_example(const Variant **args, GDExtensionInt arg_count, GDExtensionCallError &error);
+
+
+
 	GVARARG(String some_argument);
 	int varargs_func_nv(const Variant **args, GDExtensionInt arg_count, GDExtensionCallError &error);
 
@@ -193,6 +193,20 @@ public:
 	virtual void _input(const Ref<InputEvent> &event) override;
 
 	void print_vec();
+	
+protected:
+	// This method is created automatically
+	//static void _bind_methods();
+
+	void _notification(int p_what);
+	bool _set(const StringName &p_name, const Variant &p_value);
+	bool _get(const StringName &p_name, Variant &r_ret) const;
+	void _get_property_list(List<PropertyInfo> *p_list) const;
+	bool _property_can_revert(const StringName &p_name) const;
+	bool _property_get_revert(const StringName &p_name, Variant &r_property) const;
+
+	String _to_string() const;
+
 };
 
 /* Variant casts are generated in binds header
