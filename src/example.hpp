@@ -108,7 +108,6 @@ public:
 	// Methods declarations
 	// Registered automatically when public
 
-	virtual void _ready();
 	void simple_func();
 	void simple_const_func() const;
 	int custom_ref_func(Ref<ExampleRef> p_ref);
@@ -182,14 +181,21 @@ public:
 	void test_send_rpc(int p_value);
 	int return_last_rpc_arg();
 
-	Vector4 get_v4() const;
-
 	// Static method declaration
 	// Registered automatically if public
 	static int test_static(int p_a, int p_b);
 	static void test_static2();
 
-	// Virtual functions are not registered
+	// if you set auto_methods in SConstruct to false,
+	// you'll have to put GMETHOD() before every
+	// public method you want to register
+	
+	GMETHOD();
+	Vector4 get_v4() const;
+
+
+	// Virtual methods are not registered
+	virtual void _ready();
 	virtual bool _has_point(const Vector2 &point) const override;
 	virtual void _input(const Ref<InputEvent> &event) override;
 
