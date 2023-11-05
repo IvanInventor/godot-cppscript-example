@@ -348,6 +348,3 @@ void Example::_input(const Ref<InputEvent> &event) {
 	}
 }
 
-void Example::print_vec() {
-	UtilityFunctions::print('[', custom_position.x, ", ", custom_position.y, ']');
-}

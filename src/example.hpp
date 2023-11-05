@@ -193,8 +193,6 @@ public:
 	virtual bool _has_point(const Vector2 &point) const override;
 	virtual void _input(const Ref<InputEvent> &event) override;
 
-	void print_vec();
-	
 protected:
 	// This method is created automatically
 	//static void _bind_methods();
