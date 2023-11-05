@@ -53,8 +53,12 @@ private:
 	// (it is a template, not a generated declaration,
 	// so it is not assessible from a C++ code)
 	GPROPERTY(set_custom_position, get_custom_position);
-	Vector2 custom_position; // Has custom setter/getter
-	
+	Vector2 custom_position; 			// 
+							//
+public:							//	Has custom setter/getter
+	void set_custom_position(const Vector2 &pos);	//
+	Vector2 get_custom_position() const;		//
+private:
 
 	// No custom set/get example
 	GPROPERTY(set_float_auto, get_float_auto);
@@ -103,9 +107,6 @@ public:
 
 	// Methods declarations
 	// Registered automatically when public
-
-	void set_custom_position(const Vector2 &pos);
-	Vector2 get_custom_position() const;
 
 	virtual void _ready();
 	void simple_func();

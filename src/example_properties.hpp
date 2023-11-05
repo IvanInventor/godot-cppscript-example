@@ -35,6 +35,9 @@ public:
 	// hint_string - C-style string,
 	// content depends on hint type
 	// can be omitted in GPROPERTY()
+	//
+	// See: PropertyHint enum in editor
+	// documentation for all hint types
 
 	GPROPERTY(set_nohint, get_nohint,
 		none);
