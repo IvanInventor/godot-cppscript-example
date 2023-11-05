@@ -10,3 +10,8 @@ build/
 *.o
 *.os
 *.so
+
+#Generated files
+*defs.json
+*.gen.h
+*.gen.cpp
