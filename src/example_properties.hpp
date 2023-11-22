@@ -12,7 +12,6 @@
 using namespace godot;
 
 class ExampleProperties : public Control {
-	GCLASS(ExampleProperties, Control);
 
 public:
 	GGROUP(Basic types);
@@ -233,4 +232,6 @@ public:
 		array_type);
 	Array array_type_property;
 	*/
+
+	GCLASS(ExampleProperties, Control);
 };

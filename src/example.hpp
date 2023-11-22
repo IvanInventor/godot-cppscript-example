@@ -26,19 +26,16 @@ using namespace godot;
 class ExampleRef;
 
 class Example : public Control {
-	// Register your class
-	// Possible class types:
-	// basic class 		GCLASS(name, base_name)
-	// virtual class 	GVIRTUAL_CLASS(name, base_name)
-	// abstract class 	GABSTRACT_CLASS(name, base_name)
-	GCLASS(Example, Control);
+	// Class with all cppscript features explained
+	// Check end of Example class declaration for
+	// the most important cppscript macro
+
 
 	// Signal declaration
 	// provide signal name, list of (arg_type, arg_name)/arg_name
 	GSIGNAL(custom_signal, String name, int value);
 	GSIGNAL(example_signal, float typed_arg, untyped_arg);
 
-private:
 	// Group/subgroup declarations
 	// Affects all properties below it
 	// Remove group with empty GGROUP()/GSUBGROUP() respectively
@@ -49,9 +46,7 @@ private:
 	// Provide setter and getter name
 	//
 	// If member function with the same name is not declared,
-	// it is created automatically
-	// (it is a template, not a generated declaration,
-	// so it is not assessible from a C++ code)
+	// it is generated automatically
 	GPROPERTY(set_custom_position, get_custom_position);
 	Vector2 custom_position; 			// 
 							//
@@ -61,6 +56,8 @@ public:							//	Has custom setter/getter
 private:
 
 	// No custom set/get example
+	// Generates set_float_auto/get_float_auto
+	// public methods (also accessible in C++)
 	GPROPERTY(set_float_auto, get_float_auto);
 	float float_auto = 0;
 
@@ -118,7 +115,7 @@ public:
 	Viewport *return_something_const() const;
 
 	// Use GIGNORE() macro to not register
-	// next method/enum/constant declaration
+	// next public method/enum/constant declaration
 	GIGNORE();
 	Ref<ExampleRef> return_ref() const;
 
@@ -145,6 +142,12 @@ public:
 	void varargs_func_void(const Variant **args, GDExtensionInt arg_count, GDExtensionCallError &error);
 
 	void emit_custom_signal(const String &name, int value);
+
+	// Default argument values are mostly supported
+	// (For default value of String class you should use
+	// this workaround:
+	// void func(String arg = String("default"));
+	// )
 	int def_args(int p_a = 100, int p_b = 200);
 
 	Array test_array() const;
@@ -173,10 +176,15 @@ public:
 	// RPC method declaration
 	// Same rules as in GDscript
 	// To make use of RPC methods, you need to call
-	// _rpc_config() generated method in _ready method
+	// _rpc_config() generated method in _ready() method
 	// or on NOTIFICATION_READY notification
 	GRPC(authority, reliable, call_local);
 	void test_rpc(int p_value);
+
+	GRPC(any_peer, unreliable_ordered, call_remote, 42);
+	void rpc_example();
+
+
 
 	void test_send_rpc(int p_value);
 	int return_last_rpc_arg();
@@ -194,10 +202,16 @@ public:
 	Vector4 get_v4() const;
 
 
-	// Virtual methods are not registered
-	virtual void _ready();
+	// Virtual methods
+	virtual void virtual_example();
+
+	// Methods starting with '_' are
+	// used internally and don't need
+	// to be registered
+	virtual void _ready() override;
 	virtual bool _has_point(const Vector2 &point) const override;
 	virtual void _input(const Ref<InputEvent> &event) override;
+
 
 protected:
 	// This method is created automatically
@@ -212,6 +226,12 @@ protected:
 
 	String _to_string() const;
 
+	// Register your class
+	// Possible class types:
+	// basic class 		GCLASS(name, base_name)
+	// virtual class 	GVIRTUAL_CLASS(name, base_name)
+	// abstract class 	GABSTRACT_CLASS(name, base_name)
+	GCLASS(Example, Control);
 };
 
 /* Variant casts are generated in binds header
@@ -229,7 +249,6 @@ VARIANT_ENUM_CAST(EnumWithoutClass);
 */
 
 class ExampleRef : public RefCounted {
-	GCLASS(ExampleRef, RefCounted);
 
 private:
 	static int instance_count;
@@ -238,20 +257,18 @@ private:
 	GPROPERTY(set_id, get_id)
 	int id;
 
-protected:
-	//static void _bind_methods();
-
 public:
 	ExampleRef();
 	~ExampleRef();
 
 	void set_id(int p_id);
 	int get_id() const;
+
+	GCLASS(ExampleRef, RefCounted);
 };
 
 class ExampleMin : public Control {
 	GCLASS(ExampleMin, Control);
-
 };
 
 

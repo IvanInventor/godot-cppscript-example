@@ -311,6 +311,8 @@ void Example::test_rpc(int p_value) {
 	last_rpc_arg = p_value;
 }
 
+void Example::rpc_example() {}
+
 void Example::test_send_rpc(int p_value) {
 	rpc("test_rpc", p_value);
 }
@@ -348,3 +350,4 @@ void Example::_input(const Ref<InputEvent> &event) {
 	}
 }
 
+void Example::virtual_example() {}
