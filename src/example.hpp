@@ -25,6 +25,11 @@ using namespace godot;
 
 class ExampleRef;
 
+class ExampleInitLevel : public Node {
+	GINIT_LEVEL_CORE();
+
+	GCLASS(ExampleInitLevel, Node);
+};
 class Example : public Control {
 	// Class with all cppscript features explained
 	// Check end of Example class declaration for
