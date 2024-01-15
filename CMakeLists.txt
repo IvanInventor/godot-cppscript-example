@@ -85,6 +85,9 @@ create_cppscript_target(
 	# Name of your main target
 	${PROJECT_NAME}
 
+	# Header files to parse (.hpp only)
+	"${CPPSCRIPT_HEADERS}"
+
 	# Name of header to be included to enable cppscript
 	# (Prefer name unique to your project)
 	cppscript.h

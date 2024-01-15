@@ -11,7 +11,7 @@
 
 using namespace godot;
 
-void LIBRARY_INIT_FUNC(ModuleInitializationLevel p_level) {
+void initialize_scripts_module(ModuleInitializationLevel p_level) {
 	switch (p_level) {
 		case MODULE_INITIALIZATION_LEVEL_CORE:
 			_register_level_core();
@@ -33,7 +33,7 @@ void LIBRARY_INIT_FUNC(ModuleInitializationLevel p_level) {
 	}
 }
 
-void LIBRARY_DEINIT_FUNC(ModuleInitializationLevel p_level) {
+void uninitialize_scripts_module(ModuleInitializationLevel p_level) {
 	switch (p_level) {
 		case MODULE_INITIALIZATION_LEVEL_CORE:
 			break;
@@ -56,8 +56,8 @@ extern "C" {
 GDExtensionBool GDE_EXPORT scripts_library_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization) {
 	godot::GDExtensionBinding::InitObject init_obj(p_get_proc_address, p_library, r_initialization);
 
-	init_obj.register_initializer(LIBRARY_INIT_FUNC);
-	init_obj.register_terminator(LIBRARY_DEINIT_FUNC);
+	init_obj.register_initializer(initialize_scripts_module);
+	init_obj.register_terminator(uninitialize_scripts_module);
 	init_obj.set_minimum_library_initialization_level(DEFAULT_INIT_LEVEL);
 
 	return init_obj.init();

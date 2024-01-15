@@ -1,7 +1,9 @@
+import os, sys
+sys.path.append('cppscript')
 from cppscript import create_cppscript_target, GlobRecursive
-import os
 
-SRC_DIR = '../src'
+# Customize this value depending on your project
+SRC_DIR = 'src'
 library_name = 'scripts'
 
 env = SConscript('godot-cpp/SConstruct').Clone()
@@ -25,7 +27,7 @@ generated = create_cppscript_target(
 		'header_dir' : SRC_DIR,
 
 		# Path to generated object files
-		'gen_dir' : "../.gen",
+		'gen_dir' : ".gen",
 
 		# Generate bindings to public methods automatically
 		# or require GMETHOD() before methods
@@ -47,14 +49,14 @@ generated = create_cppscript_target(
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-	"../bin/lib{}.{}.{}.framework/lib{}.{}.{}".format(
+	"bin/lib{}.{}.{}.framework/lib{}.{}.{}".format(
 	library_name, env["platform"], env["target"], library_name, env["platform"], env["target"]
 	),
 	source=sources + generated, # Add generated source files to target
     )
 else:
     library = env.SharedLibrary(
-	"../bin/lib{}{}{}".format(library_name, env["suffix"], env["SHLIBSUFFIX"]),
+	"bin/lib{}{}{}".format(library_name, env["suffix"], env["SHLIBSUFFIX"]),
 	source=sources + generated, # Add generated source files to target
     )
 

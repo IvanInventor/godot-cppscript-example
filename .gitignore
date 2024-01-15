@@ -27,3 +27,6 @@ build/
 *defs.json
 *.gen.h
 *.gen.cpp
+
+# Scons specific
+*.sconsign.dblite
