@@ -1,21 +1,28 @@
 import os, sys
-sys.path.append('cppscript')
+sys.path.append('external/cppscript')
 from cppscript import create_cppscript_target, GlobRecursive
 
-# Customize this value depending on your project
-SRC_DIR = 'src'
+# Customize this values depending on your project
 library_name = 'scripts'
+SRC_DIR = 'src'
+GEN_DIR = '.gen'
 
-env = SConscript('godot-cpp/SConstruct').Clone()
+env = SConscript('external/godot-cpp/SConstruct').Clone()
 
 sources = GlobRecursive(SRC_DIR, '*.cpp')
-scripts = GlobRecursive(SRC_DIR, '*.hpp')
 
 env.Append(CXXFLAGS='-fdiagnostics-color=always')
 
+###############################
+# godot-cppscript creation
+
+# Get header files (.hpp only)
+scripts = GlobRecursive(SRC_DIR, '*.hpp')
+
+# Create target, returns generated .cpp files list
 generated = create_cppscript_target(
 		env,		# SCons env, env.Clone() for different projects
-		scripts,	# Header files to parse (.hpp only)
+		scripts,	# Header files to parse
 
 		# CppScript config
 		{
@@ -27,7 +34,7 @@ generated = create_cppscript_target(
 		'header_dir' : SRC_DIR,
 
 		# Path to generated object files
-		'gen_dir' : ".gen",
+		'gen_dir' : GEN_DIR,
 
 		# Generate bindings to public methods automatically
 		# or require GMETHOD() before methods
@@ -47,6 +54,8 @@ generated = create_cppscript_target(
 		}
 )
 
+###############################
+
 if env["platform"] == "macos":
     library = env.SharedLibrary(
 	"bin/lib{}.{}.{}.framework/lib{}.{}.{}".format(
@@ -60,7 +69,10 @@ else:
 	source=sources + generated, # Add generated source files to target
     )
 
+###############################
 # Rebuild after headers change
 env.Depends(library[0].sources, generated)
+
+###############################
 
 Default(library)

@@ -1,7 +1,8 @@
-[submodule "cppscript"]
-	path = cppscript
-	url = https://github.com/IvanInventor/godot-cpp-script
-	branch = master
-[submodule "godot-cpp"]
-	path = godot-cpp
+[submodule "external/godot-cpp"]
+	path = external/godot-cpp
 	url = https://github.com/godotengine/godot-cpp
+	branch = master
+[submodule "external/cppscript"]
+	path = external/cppscript
+	url = https://github.com/IvanInventor/godot-cppscript
+	branch = master

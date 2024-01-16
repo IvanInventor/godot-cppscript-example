@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.6)
 project(scripts LANGUAGES CXX)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo;MinSizeRel")
-set(GODOT_CPP_PATH godot-cpp)	# path to godot-cpp repository
+set(GODOT_CPP_PATH external/godot-cpp)	# path to godot-cpp repository
 
 add_subdirectory(${GODOT_CPP_PATH})
 
@@ -73,8 +73,8 @@ endif()
 ###############################
 # godot-cppscript creation
 
-# include module
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cppscript")
+# Include module
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/external/cppscript")
 include(godot-cppscript)
 
 # Get header files (.hpp only)
